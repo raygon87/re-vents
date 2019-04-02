@@ -1,15 +1,32 @@
 import React, { Component } from 'react'
 import { Segment, Form, Button } from 'semantic-ui-react'
 
-class EventForm extends Component {
+const emptyEvent = {
+  title: '',
+  date: '',
+  city: '',
+  venue: '',
+  hostedBy: ''
+}
 
+class EventForm extends Component {
   state = {
-    event: {
-      title: '',
-      date: '',
-      city: '',
-      venue: '',
-      hostedBy: ''
+    event: emptyEvent
+  }
+
+  componentDidMount() {
+    if (this.props.selectedEvent !== null) {
+      this.setState({
+        event: this.props.selectedEvent
+      })
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.selectedEvent !== this.props.selectedEvent) {
+      this.setState({
+        event: nextProps.selectedEvent || emptyEvent
+      })
     }
   }
 
@@ -38,19 +55,19 @@ class EventForm extends Component {
           </Form.Field>
           <Form.Field>
             <label>Event Date</label>
-            <input name='date' type="date" placeholder="Event Date" onChange={this.onInputChange}/>
+            <input name='date' value={event.date} type="date" placeholder="Event Date" onChange={this.onInputChange}/>
           </Form.Field>
           <Form.Field>
             <label>City</label>
-            <input name='city' placeholder="City event is taking place" onChange={this.onInputChange}/>
+            <input name='city' value={event.city} placeholder="City event is taking place" onChange={this.onInputChange}/>
           </Form.Field>
           <Form.Field>
             <label>Venue</label>
-            <input name='venue' placeholder="Enter the Venue of the event" onChange={this.onInputChange}/>
+            <input name='venue' value={event.venue} placeholder="Enter the Venue of the event" onChange={this.onInputChange}/>
           </Form.Field>
           <Form.Field>
             <label>Hosted By</label>
-            <input name='hostedBy' placeholder="Enter the name of person hosting" onChange={this.onInputChange}/>
+            <input name='hostedBy' value={event.hostedBy} placeholder="Enter the name of person hosting" onChange={this.onInputChange}/>
           </Form.Field>
           <Button positive type="submit">
             Submit
