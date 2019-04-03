@@ -23,7 +23,7 @@ body {
 .masthead {
   background-image: linear-gradient(
           135deg,
-          rgb(24, 42, 115) 0%,
+          rgb(115, 24, 104) 0%,
           rgb(33, 138, 174) 69%,
           rgb(32, 167, 172) 89%
   ) !important;
@@ -32,6 +32,7 @@ body {
 .masthead.segment {
   min-height: 700px;
   padding: 1em 0 !important;
+  height: 98vh;
 }
 
 .masthead .ui.menu .ui.button,
@@ -103,4 +104,8 @@ body {
 .ui.comments .comment .comments {
   padding-bottom: 0 !important;
   padding-left: 2em !important;
+}
+
+.acknowledgement {
+  height: 2vh;
 }
