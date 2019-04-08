@@ -110,6 +110,8 @@ body {
   height: 2vh;
 }
 
-.ui.form input[type=text] {
+.ui.form input[type=text], 
+.ui.form textarea, 
+.ui.form .field>.selection.dropdown {
   margin: 6px;
 }
