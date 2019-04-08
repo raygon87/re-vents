@@ -115,3 +115,7 @@ body {
 .ui.form .field>.selection.dropdown {
   margin: 6px;
 }
+
+.ui.basic.label {
+  border: none;
+}
