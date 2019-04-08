@@ -10,19 +10,15 @@ import SelectInput from "../../../app/common/form/SelectInput";
 
 const mapState = (state, ownProps) => {
   const eventId = ownProps.match.params.id;
-  let event = {
-    title: "",
-    date: "",
-    city: "",
-    venue: "",
-    hostedBy: ""
-  };
+  let event = {};
 
   if (eventId && state.events.length > 0) {
     event = state.events.filter(event => event.id === eventId)[0];
   }
 
-  return { event };
+  return { 
+    initialValues: event
+  };
 };
 
 const actions = {
@@ -95,7 +91,7 @@ class EventForm extends Component {
                 name="title"
                 type="text"
                 component={TextInput}
-                placeholder="Give your event a name "
+                placeholder="Give your event a name"
               />
               <Field
                 name="category"
@@ -145,7 +141,4 @@ class EventForm extends Component {
   }
 }
 
-export default connect(
-  mapState,
-  actions
-)(reduxForm({ form: "eventForm" })(EventForm));
+export default connect(mapState, actions)(reduxForm({ form: "eventForm", enableReinitialize: true})(EventForm));
