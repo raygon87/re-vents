@@ -109,3 +109,7 @@ body {
 .acknowledgement {
   height: 2vh;
 }
+
+.ui.form input[type=text] {
+  margin: 6px;
+}
