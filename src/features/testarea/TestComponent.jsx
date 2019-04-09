@@ -1,21 +1,23 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import GoogleMapReact from 'google-map-react';
-import { Button, Icon } from 'semantic-ui-react'
-import Script from 'react-load-script'
-import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
-import { incrementCounter, decrementCounter } from './testActions'
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import GoogleMapReact from "google-map-react";
+import { Button, Icon } from "semantic-ui-react";
+import Script from "react-load-script";
+import PlacesAutocomplete, { geocodeByAddress, getLatLng } from "react-places-autocomplete";
+import { incrementCounter, decrementCounter } from "./testActions";
+import { openModal } from '../modals/modalActions';
 
-const mapState = (state) => ({
+const mapState = state => ({
   data: state.test.data
-})
+});
 
 const actions = {
   incrementCounter,
-  decrementCounter
-}
+  decrementCounter,
+  openModal
+};
 
-const Marker = () => <Icon name='marker' size='big' color='red'/>
+// const Marker = () => <Icon name="marker" size="big" color="red" />;
 
 class TestComponent extends Component {
   static defaultProps = {
@@ -27,32 +29,32 @@ class TestComponent extends Component {
   };
 
   state = {
-    address: '',
+    address: "",
     scriptLoaded: false
-  }
+  };
 
   handleScriptLoad = () => {
-    this.setState({scriptLoaded: true})
-  }
+    this.setState({ scriptLoaded: true });
+  };
 
-  handleFormSubmit = (event) => {
-    event.preventDefault()
+  handleFormSubmit = event => {
+    event.preventDefault();
 
     geocodeByAddress(this.state.address)
       .then(results => getLatLng(results[0]))
-      .then(latLng => console.log('Success', latLng))
-      .catch(error => console.error('Error', error))
-  }
+      .then(latLng => console.log("Success", latLng))
+      .catch(error => console.error("Error", error));
+  };
 
-  onChange = (address) => this.setState({address});
+  onChange = address => this.setState({ address });
 
   render() {
     const inputProps = {
       value: this.state.address,
-      onChange: this.onChange,
-    }
+      onChange: this.onChange
+    };
 
-    const { incrementCounter, decrementCounter, data } = this.props
+    const { incrementCounter, decrementCounter, data, openModal } = this.props;
     return (
       <div>
         {/* <Script
@@ -61,32 +63,35 @@ class TestComponent extends Component {
         /> */}
         <h1>Test Area</h1>
         <h3>The answer is: {data}</h3>
-        <Button onClick={incrementCounter} color='green' content='Increment'/>
-        <Button onClick={decrementCounter} color='red' content='Decrement'/>
-        <br/>
-        <br/>
+        <Button onClick={incrementCounter} color="green" content="Increment" />
+        <Button onClick={decrementCounter} color="red" content="Decrement" />
+        <Button onClick={() => openModal('TestModal', {})} color="teal" content="Open Modal" />
+        <br />
+        <br />
         <form onSubmit={this.handleFormSubmit}>
-          {this.state.scriptLoaded &&
-          <PlacesAutocomplete inputProps={inputProps} />}
+          {this.state.scriptLoaded && (
+            <PlacesAutocomplete inputProps={inputProps} />
+          )}
           <button type="submit">Submit</button>
         </form>
 
-          <div style={{ height: '300px', width: '100%' }}>
+        {/* <div style={{ height: "300px", width: "100%" }}>
           <GoogleMapReact
-            bootstrapURLKeys={{ key: 'AIzaSyDCjlkA3UsUWM0rRkqbZ2z2BDswXrchN7M' }} // maps javascript api
+            bootstrapURLKeys={{
+              key: "AIzaSyDCjlkA3UsUWM0rRkqbZ2z2BDswXrchN7M"
+            }} // maps javascript api
             defaultCenter={this.props.center}
             defaultZoom={this.props.zoom}
           >
-            <Marker
-              lat={59.955413}
-              lng={30.337844}
-              text="My Marker"
-            />
+            <Marker lat={59.955413} lng={30.337844} text="My Marker" />
           </GoogleMapReact>
-        </div>
+        </div> */}
       </div>
-    )
+    );
   }
 }
 
-export default connect(mapState, actions)(TestComponent);
+export default connect(
+  mapState,
+  actions
+)(TestComponent);
