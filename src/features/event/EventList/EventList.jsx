@@ -12,7 +12,7 @@ class EventList extends Component {
             event={event}
             deleteEvent={deleteEvent}
           />
-        ))}
+        ))}  
       </div>
     );
   }
