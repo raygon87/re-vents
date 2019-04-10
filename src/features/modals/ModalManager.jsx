@@ -1,28 +1,32 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import TestModal from './TestModal'
+import React from "react";
+import { connect } from "react-redux";
+import TestModal from "./TestModal";
+import LoginModal from './LoginModal';
+import RegisterModal from './RegisterModal';
 
 const modalLookup = {
-  TestModal
-}
+  TestModal,
+  LoginModal,
+  RegisterModal
+};
 
-const mapState = (state) => ({
+const mapState = state => ({
   currentModal: state.modals
-})
+});
 
-const ModalManager = ({currentModal}) => {
+const ModalManager = ({ currentModal }) => {
   let renderedModal;
-  
-  if(currentModal) {
-    console.log('ModalManager: currentModal',currentModal);
-    console.log('ModalManager: modalType',currentModal.modalType);
-    console.log('ModalManager: modalProps',currentModal.modalProps);
-    const {modalType, modalProps} = currentModal;
+
+  if (currentModal) {
+    console.log("ModalManager: currentModal", currentModal);
+    console.log("ModalManager: modalType", currentModal.modalType);
+    console.log("ModalManager: modalProps", currentModal.modalProps);
+    const { modalType, modalProps } = currentModal;
     const ModalComponent = modalLookup[modalType];
 
-    renderedModal = <ModalComponent {...modalProps}/>
+    renderedModal = <ModalComponent {...modalProps} />;
   }
-  return <span>{renderedModal}</span>
-}
+  return <span>{renderedModal}</span>;
+};
 
-export default connect(mapState)(ModalManager)
+export default connect(mapState)(ModalManager);
