@@ -4,17 +4,20 @@ import GoogleMapReact from "google-map-react";
 import { Button, Icon } from "semantic-ui-react";
 import Script from "react-load-script";
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from "react-places-autocomplete";
-import { incrementCounter, decrementCounter } from "./testActions";
+import { incrementCounter, decrementCounter, incrementAsync, decrementAsync } from "./testActions";
 import { openModal } from '../modals/modalActions';
 
 const mapState = state => ({
-  data: state.test.data
+  data: state.test.data,
+  loading: state.test.loading
 });
 
 const actions = {
   incrementCounter,
   decrementCounter,
-  openModal
+  openModal,
+  incrementAsync,
+  decrementAsync
 };
 
 // const Marker = () => <Icon name="marker" size="big" color="red" />;
@@ -54,7 +57,7 @@ class TestComponent extends Component {
       onChange: this.onChange
     };
 
-    const { incrementCounter, decrementCounter, data, openModal } = this.props;
+    const { incrementCounter, incrementAsync, decrementAsync, decrementCounter, loading, data, openModal } = this.props;
     return (
       <div>
         {/* <Script
@@ -63,8 +66,8 @@ class TestComponent extends Component {
         /> */}
         <h1>Test Area</h1>
         <h3>The answer is: {data}</h3>
-        <Button onClick={incrementCounter} color="green" content="Increment" />
-        <Button onClick={decrementCounter} color="red" content="Decrement" />
+        <Button onClick={incrementAsync} color="green" content="Increment" loading={loading}/>
+        <Button onClick={decrementAsync} color="red" content="Decrement" loading={loading}/>
         <Button onClick={() => openModal('TestModal', {})} color="teal" content="Open Modal" />
         <br />
         <br />
