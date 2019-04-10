@@ -3,13 +3,15 @@ import { Segment, Grid, Icon, Button } from "semantic-ui-react";
 import EventDetailedMap from './EventDetailedMap';
 import format from 'date-fns/format';
 
-const styles = {
-
-}
-
 class EventDetailedInfo extends Component {
   state = {
     showMap: false
+  }
+
+  componentWillUnmount() {
+    this.setState({
+      showMap: false
+    })
   }
 
   showMapToggle = () => {

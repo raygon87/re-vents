@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import GoogleMapReact from "google-map-react";
-import { Button, Icon } from "semantic-ui-react";
-import Script from "react-load-script";
+// import GoogleMapReact from "google-map-react";
+import { Button } from "semantic-ui-react";
+// import Script from "react-load-script";
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import { incrementCounter, decrementCounter, incrementAsync, decrementAsync } from "./testActions";
 import { openModal } from '../modals/modalActions';
@@ -57,7 +57,7 @@ class TestComponent extends Component {
       onChange: this.onChange
     };
 
-    const { incrementCounter, incrementAsync, decrementAsync, decrementCounter, loading, data, openModal } = this.props;
+    const { incrementAsync, decrementAsync, loading, data, openModal } = this.props;
     return (
       <div>
         {/* <Script
